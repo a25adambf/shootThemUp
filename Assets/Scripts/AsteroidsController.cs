@@ -35,8 +35,12 @@ public class AsteroidsController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("shoot") || 
-            other.gameObject.CompareTag("ship"))
+        if (other.gameObject.CompareTag("shoot"))
+        {
+            GameManager.GetInstance().AddScore(5); // 5 puntos por asteroide
+            Explode();
+        }
+        else if (other.gameObject.CompareTag("ship"))
         {
             Explode();
         }

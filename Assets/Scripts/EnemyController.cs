@@ -15,6 +15,11 @@ public class EnemyController : MonoBehaviour
     // Método llamado cuando el objeto entra en contacto con otro collider
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // Solo sumar puntos si el objeto que colisiona es un disparo
+        if (other.CompareTag("shoot"))
+        {
+            GameManager.GetInstance().AddScore(10); // 10 puntos por nave enemiga
+        }
         DestroyEnemy(); // Destruir la nave enemiga
     }
 
@@ -40,6 +45,12 @@ public class EnemyController : MonoBehaviour
     }
 
    private void OnCollisionEnter2D(Collision2D other) {
-        DestroyEnemy();
+       if (other.gameObject.CompareTag("shoot"))
+    {
+        GameManager.GetInstance().AddScore(10);
     }
+    DestroyEnemy();
+   }
+
+   
 }

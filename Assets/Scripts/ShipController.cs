@@ -110,10 +110,16 @@ public class ShipController : MonoBehaviour
         active = false;
         // Instanciar la animación de la explosión
         Instantiate(explosion, transform.position, Quaternion.identity);
-        // Resetear posición de la nave
-        transform.position = initialPosition;
-        // Reiniciar la nave
-        StartCoroutine("StartPlayer");
+        // Restar una vida al jugador
+        GameManager.GetInstance().LoseLife();
+        // Solo reiniciar la nave si el juego no ha terminado
+        if (!GameManager.GetInstance().IsGameOver())
+        {
+            // Resetear posición de la nave
+            transform.position = initialPosition;
+            // Reiniciar la nave
+            StartCoroutine("StartPlayer");
+        }
     }
 
 
